@@ -43,7 +43,45 @@ def takeCommand():
             return None
         return query
 
+def wish_me():
+    hour = (dt.datetime.now().hour)
+    if hour>=0 and hour<12:
+        speak("Good morning Sartaj. How are you doing")
+    
+    elif hour>=12 and hour<18:
+        speak("Good afternoon Sartaj. How are you doing")
+
+    else:
+        speak("Good evening Sartaj. How are you doing")
+    
+    speak("I am JARVIS. Tell me Sartaj how can i help you")
 
 # speak('We are developing Desktop Assistant Project')
-text = takeCommand()
-speak(text)
+#text = takeCommand()
+#speak(text)
+
+if __name__ == '__main__':
+     
+    wish_me()
+
+    while True:
+
+        print('Please ask...')
+        query = takeCommand().lower()
+        print(query)
+
+        if 'wikipedia' in query:
+            speak('Searching wikipedia')
+            query=query.replace('wikipedia','')
+            results = wp.summary(query,sentences = 2)
+            speak('According to wikipedia')
+            print(results)
+            speak(results)
+        elif 'youtube' in query:
+            speak('Opening Youtube')
+            wb.open('youtube.com')
+        elif 'google' in query:
+            speak('Opening Google')
+            wb.open('google.com')        
+        elif 'good by' in query:
+            exit()
